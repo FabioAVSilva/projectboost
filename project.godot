@@ -11,6 +11,6 @@ config_version=5
 [application]
 
 config/name="ProjectBoost"
-run/main_scene="uid://cf6yi2c1pv6s0"
+run/main_scene="uid://ibcbv4ejjhmj"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
