@@ -20,7 +20,7 @@ func _process(delta: float) -> void:
 
 func _on_body_entered(body: Node) -> void:
 	if "Goal" in body.get_groups():
-		complete_level()
+		complete_level(body.file_path)
 	elif "Hazard" in body.get_groups():
 		crash_sequence()
 		
@@ -29,6 +29,6 @@ func crash_sequence() -> void:
 	print("Kaboom!!")
 	get_tree().reload_current_scene()
 	
-func complete_level() -> void:
+func complete_level(next_level_file: String) -> void:
 	print("Level Complete")
-	get_tree().quit()
+	get_tree().change_scene_to_file(next_level_file)
