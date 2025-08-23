@@ -14,6 +14,8 @@ var is_transitioning: bool = false
 @onready var booster_particles: GPUParticles3D = $BoosterParticles
 @onready var booster_particles_turn_left: GPUParticles3D = $BoosterParticlesTurnLeft
 @onready var booster_particles_turn_right: GPUParticles3D = $BoosterParticlesTurnRight
+@onready var explosion_particles: GPUParticles3D = $ExplosionParticles
+@onready var success_particles: GPUParticles3D = $SuccessParticles
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -51,6 +53,7 @@ func _on_body_entered(body: Node) -> void:
 
 func crash_sequence() -> void:
 	print("Kaboom!!")
+	explosion_particles.emitting = true
 	explosion_audio.play()
 	rocket_audio.stop()
 	set_process(false)
@@ -62,6 +65,7 @@ func crash_sequence() -> void:
 	
 func complete_level(next_level_file: String) -> void:
 	print("Level Complete")
+	success_particles.emitting = true
 	success_audio.play()
 	set_process(false)
 	is_transitioning = true
