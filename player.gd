@@ -10,11 +10,17 @@ var is_transitioning: bool = false
 
 @onready var explosion_audio: AudioStreamPlayer = $ExplosionAudio
 @onready var success_audio: AudioStreamPlayer = $SuccessAudio
+@onready var rocket_audio: AudioStreamPlayer3D = $RocketAudio
+
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	if Input.is_action_pressed("boost"):
 		apply_central_force(basis.y * delta * thrust)
+		if !rocket_audio.playing:
+			rocket_audio.play()
+	else:
+		rocket_audio.stop()
 		
 	if Input.is_action_pressed("rotate_left"):
 		apply_torque(Vector3(0.0, 0.0, torque) * delta)
@@ -34,6 +40,7 @@ func _on_body_entered(body: Node) -> void:
 func crash_sequence() -> void:
 	print("Kaboom!!")
 	explosion_audio.play()
+	rocket_audio.stop()
 	set_process(false)
 	is_transitioning = true
 	var tween = create_tween()
