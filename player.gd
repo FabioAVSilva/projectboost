@@ -40,7 +40,9 @@ func _process(delta: float) -> void:
 		booster_particles_turn_right.emitting = true
 	else:
 		booster_particles_turn_right.emitting = false	
-	
+		
+	if Input.is_action_just_pressed("ui_cancel"):
+		get_tree().quit()
 
 
 func _on_body_entered(body: Node) -> void:
